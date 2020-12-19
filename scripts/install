@@ -120,7 +120,8 @@ yunohost service add $app --description="Three-dimensional sandbox construction 
 ynh_script_progression --message="Configuring a systemd service..."
 
 ynh_add_systemd_config
-systemctl enable $app.service --quiet
+
+#systemctl enable $app.service --quiet
 
 #=================================================
 # NGINX CONFIGURATION
