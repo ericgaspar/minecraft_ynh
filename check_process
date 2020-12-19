@@ -8,9 +8,13 @@
 		domain="domain.tld"	(DOMAIN)
 		path="/"	(PATH)	
 		is_public=1	(PUBLIC|public=1|private=0)
-#		password="pass"
-#		nextclouddomain="domain.tld"
+		password="pass"
+		server="vanilla"
 		port="9980"	(PORT)
+		ram="1024"
+		op="johndoe"
+		rcon=1
+		eula=1
 	; Checks
 		pkg_linter=1
 		setup_sub_dir=0

@@ -86,17 +86,17 @@
                     "en": "Enter the name of the administrator (minecraft pseudo)!",
                     "fr": "Entrer le nom de l'adminsitrateur (minecraft pseudo) !"
                 },
-                "example": "liberodark"
+                "example": "johndoe"
             },
             {
                 "name": "rcon",
-                "type": "string",
+                "type": "boolean",
                 "ask": {
                     "en": "Do you want to activate RCON?",
                     "fr": "Voulez vous activer RCON ?"
                 },
                 "example": "true, false",
-                "default": "true"
+                "default": true
             },
             {
                 "name": "passwd",
@@ -109,7 +109,7 @@
             },
             {
                 "name": "eula",
-                "type": "string",
+                "type": "boolean",
                 "ask": {
                     "en": "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).",
                     "fr": "En modifiant le paramètre ci-dessous sur TRUE, vous indiquez votre accord avec notre CLUF (https://account.mojang.com/documents/minecraft_eula)."

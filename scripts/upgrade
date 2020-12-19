@@ -73,8 +73,12 @@ ynh_script_progression --message="Integrating service in YunoHost..." --time --w
 
 yunohost service add $app --description="Three-dimensional sandbox construction game" --log="/var/log/$app/$app.log"
 
-# Start minecraft service
-systemctl start $app
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting a systemd service..." --time --weight=1
+
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" --needs_exposed_ports=$port
 
 #=================================================
 # RELOAD NGINX

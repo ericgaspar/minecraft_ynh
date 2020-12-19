@@ -147,10 +147,9 @@ chown -R $app: $final_path
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..."
+ynh_script_progression --message="Starting a systemd service..." --time --weight=1
 
-# Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" --needs_exposed_ports=$port
 
 #=================================================
 # SETUP SSOWAT
