@@ -33,7 +33,7 @@ ram=$YNH_APP_ARG_RAM
 port=$YNH_APP_ARG_PORT
 op=$YNH_APP_ARG_OP
 rcon=$YNH_APP_ARG_RCON
-passwd=$YNH_APP_ARG_PASSWD
+password=$YNH_APP_ARG_PASSWD
 eula=$YNH_APP_ARG_EULA
 
 app=$YNH_APP_INSTANCE_NAME
@@ -98,7 +98,7 @@ ynh_replace_string "__PATH__" "$final_path" "../conf/systemd.service"
 
 ynh_replace_string "__PORT__" "$port" "../conf/server.properties"
 ynh_replace_string "__RCON__" "$rcon" "../conf/server.properties"
-ynh_replace_string "__PASSWD__" "$passwd" "../conf/server.properties"
+ynh_replace_string "__PASSWD__" "$password" "../conf/server.properties"
 cp -a ../conf/server.properties $final_path/server.properties
 
 ynh_replace_string "__OP__" "$op" "../conf/ops.txt"

@@ -99,7 +99,7 @@
                 "default": true
             },
             {
-                "name": "passwd",
+                "name": "password",
                 "type": "password",
                 "ask": {
                     "en": "Enter your password for RCON!",
