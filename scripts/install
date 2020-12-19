@@ -123,7 +123,7 @@ cp -a ../conf/eula.txt $final_path/eula.txt
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
+ynh_script_progression --message="Configuring a systemd service..."
 
 ynh_replace_string "__RAM__" "$ram" "../conf/systemd.service"
 ynh_replace_string "__PATH__" "$final_path" "../conf/systemd.service"
@@ -134,7 +134,7 @@ ynh_add_systemd_config
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
+ynh_script_progression --message="Integrating service in YunoHost..."
 
 yunohost service add $app --description="Three-dimensional sandbox construction game" --log="/var/log/$app/$app.log"
 
@@ -151,7 +151,7 @@ chown -R $app: $final_path
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --time --weight=1
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" --needs_exposed_ports=$port
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" #--needs_exposed_ports=$port
 
 #=================================================
 # SETUP SSOWAT
