@@ -29,7 +29,6 @@ path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
 server=$YNH_APP_ARG_SERVER
 ram=$YNH_APP_ARG_RAM
-port=$YNH_APP_ARG_PORT
 op=$YNH_APP_ARG_OP
 rcon=$YNH_APP_ARG_RCON
 password=$YNH_APP_ARG_PASSWORD
@@ -63,15 +62,11 @@ ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 ynh_script_progression --message="Configuring firewall..." --time --weight=1
 
 # Find a free port
-port_test=$(ynh_find_port $port)
-port_test1=$(ynh_find_port 25575)
+port=$(ynh_find_port --port=25565)
+ynh_app_setting_set --app=$app --key=port --value=$port
 
 # Open this port
-yunohost firewall allow --no-upnp TCP $port_test 2>&1
-yunohost firewall allow --no-upnp TCP $port_test1 2>&1
-
-ynh_app_setting_set --app=$app --key=port --value=$port_test
-ynh_app_setting_set --app=$app --key=port --value=$port_test1
+ynh_exec_warn_less yunohost firewall allow --no-upnp TCP $port
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -167,7 +162,7 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading nginx web server..."
+ynh_script_progression --message="Reloading NGINX web server..."
 
 ynh_systemd_action --service_name=nginx --action=reload
 
