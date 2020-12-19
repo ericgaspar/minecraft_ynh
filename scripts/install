@@ -140,6 +140,7 @@ yunohost service add $app --description="Three-dimensional sandbox construction 
 #=================================================
 
 chown -R $app: $final_path
+chmod -R 755 $final_path
 
 #=================================================
 # START SYSTEMD SERVICE

@@ -26,7 +26,6 @@ final_path=$(ynh_app_setting_get $app final_path)
 # REMOVE SERVICE FROM ADMIN PANEL
 #=================================================
 
-# Remove a service from the admin panel, added by `yunohost service add`
 if yunohost service status $app >/dev/null 2>&1
 then
 	ynh_script_progression --message="Removing $app service"
