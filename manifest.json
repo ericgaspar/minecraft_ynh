@@ -66,15 +66,15 @@
                     "en": "Set the memory limit for the server. Convert the number to mebibytes (binary MB): for example, 2GB = 2048, 4GB = 4096...",
                     "fr": "Définir la mémoire du serveur ? Convertir le chiffre en mébioctets (Mo binaires) : soit 2Go = 2048, 4Go = 4096..."
                 },
-                "example": "1024, 2048, 4096, ...",
+                "example": "1024, 2048, 4096...",
                 "default": "1024"
             },
             {
                 "name": "op",
                 "type": "string",
                 "ask": {
-                    "en": "Enter the name of the administrator (Minecraft pseudo)!",
-                    "fr": "Entrer le nom de l'adminsitrateur (pseudo Minecraft) !"
+                    "en": "Enter the name of the administrator (Minecraft pseudo)",
+                    "fr": "Entrer le nom de l'adminsitrateur (pseudo Minecraft)"
                 },
                 "example": "johndoe"
             },
@@ -92,8 +92,8 @@
                 "name": "password",
                 "type": "password",
                 "ask": {
-                    "en": "Enter your password for RCON!",
-                    "fr": "Entrez votre mot de passe pour RCON !"
+                    "en": "Enter your password for RCON",
+                    "fr": "Entrez votre mot de passe pour RCON"
                 },
                 "example": "mypassword"
             },
