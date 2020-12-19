@@ -14,7 +14,7 @@
 		ram="1024"
 		op="johndoe"
 		rcon=1
-		eula=1
+		eula="true"
 	; Checks
 		pkg_linter=1
 		setup_sub_dir=0
