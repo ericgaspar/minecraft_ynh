@@ -18,7 +18,19 @@ app=$YNH_APP_INSTANCE_NAME
 
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
-final_path=/home/yunohost.app/$app
+#=================================================
+# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+#=================================================
+ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --time --weight=1
+
+# Backup the current version of the app
+ynh_backup_before_upgrade
+ynh_clean_setup () {
+	# restore it if the upgrade fails
+	ynh_restore_upgradebackup
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
 
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -26,6 +38,13 @@ final_path=/home/yunohost.app/$app
 ynh_script_progression --message="Stopping a systemd service..."
 
 ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app/$app.log"
+
+#=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_print_info "Reinstalling dependencies..."
+
+ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -37,7 +56,7 @@ ynh_setup_source "$final_path"
 
 # Set permissions to app files
 # you may need to make some file and/or directory writeable by www-data (nginx user)
-sudo chown -R admin $final_path
+chown -R $app $final_path
 
 #=================================================
 # NGINX CONFIGURATION
@@ -48,13 +67,11 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..."
 ynh_add_nginx_config
 
 #=================================================
-# UPGRADE CONFIG
+# INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-#cp -a ../conf/loolwsd.xml /etc/loolwsd
-#ynh_replace_string "__NEXTCLOUDDOMAIN__" "$nextcloud_domain" "/etc/loolwsd/loolwsd.xml"
-#ynh_replace_string "__PASSWORD__" "$password" "/etc/loolwsd/loolwsd.xml"
-#systemctl restart loolwsd
+ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
 
+yunohost service add $app --description="Three-dimensional sandbox construction game" --log="/var/log/$app/$app.log"
 
 # Start minecraft service
 systemctl start $app

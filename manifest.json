@@ -3,9 +3,10 @@
     "id": "minecraft",
     "packaging_format": 1,
     "description": {
-        "en": "Minecraft package for YunoHost",
-        "fr": "Minecraft pour YunoHost"
+        "en": "Three-dimensional sandbox construction game",
+        "fr": "Jeu de construction de type \"bac à sable\" en trois dimensions"
     },
+    "version": "1.16.4~ynh1",
     "url": "https://minecraft.net/",
     "license": "non-free",
     "maintainer": {
@@ -50,7 +51,7 @@
             },
             {
                 "name": "server",
-                "type": "server",
+                "type": "string",
                 "ask": {
                     "en": "Select your server",
                     "fr": "Choisir votre serveur"
@@ -60,7 +61,7 @@
             },
             {
                 "name": "port",
-                "type": "port",
+                "type": "string",
                 "ask": {
                     "en": "Select your port",
                     "fr": "Choisir votre port"
@@ -70,7 +71,7 @@
             },
             {
                 "name": "ram",
-                "type": "ram",
+                "type": "string",
                 "ask": {
                     "en": "Set the memory limit for the server. Convert the number to megabytes (MB binary): for example, 2GB = 2048, 4GB = 4096...",
                     "fr": "Définir la mémoire du serveur ? Convertir le chiffre en mébioctets (MB binaire) : soit 2GB = 2048, 4GB = 4096..."
@@ -80,7 +81,7 @@
             },
             {
                 "name": "op",
-                "type": "op",
+                "type": "string",
                 "ask": {
                     "en": "Enter the name of the administrator (minecraft pseudo)!",
                     "fr": "Entrer le nom de l'adminsitrateur (minecraft pseudo) !"
@@ -89,7 +90,7 @@
             },
             {
                 "name": "rcon",
-                "type": "rcon",
+                "type": "string",
                 "ask": {
                     "en": "Do you want to activate RCON?",
                     "fr": "Voulez vous activer RCON ?"
@@ -99,7 +100,7 @@
             },
             {
                 "name": "passwd",
-                "type": "passwd",
+                "type": "password",
                 "ask": {
                     "en": "Enter your password for RCON!",
                     "fr": "Entrez votre mot de passe pour RCON !"
@@ -108,7 +109,7 @@
             },
             {
                 "name": "eula",
-                "type": "eula",
+                "type": "string",
                 "ask": {
                     "en": "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).",
                     "fr": "En modifiant le paramètre ci-dessous sur TRUE, vous indiquez votre accord avec notre CLUF (https://account.mojang.com/documents/minecraft_eula)."

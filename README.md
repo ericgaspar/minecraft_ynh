@@ -1,7 +1,7 @@
 # Minecraft for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/minecraft.svg)](https://dash.yunohost.org/appci/app/minecraft) ![](https://ci-apps.yunohost.org/ci/badges/minecraft.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/minecraft.maintain.svg)  
-[![Install Minecraft with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=minecraft)
+[![Install Minecraft with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=minecraft)
 
 *[Lire ce readme en français.](./README_fr.md)*
 

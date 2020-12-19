@@ -108,6 +108,13 @@ ynh_replace_string "__EULA__" "$eula" "../conf/eula.txt"
 cp -a ../conf/eula.txt $final_path/eula.txt
 
 #=================================================
+# INTEGRATE SERVICE IN YUNOHOST
+#=================================================
+ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
+
+yunohost service add $app --description="Three-dimensional sandbox construction game" --log="/var/log/$app/$app.log"
+
+#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..."
