@@ -9,7 +9,7 @@
 		path="/"	(PATH)	
 		is_public=1	(PUBLIC|public=1|private=0)
 		password="pass"
-		server="vanilla"
+		#server="vanilla"
 		port="9980"	(PORT)
 		ram="1024"
 		op="johndoe"
