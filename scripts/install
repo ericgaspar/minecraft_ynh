@@ -71,7 +71,7 @@ ynh_exec_warn_less yunohost firewall allow --no-upnp TCP $port
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_print_info "Installing dependencies..." --weight=5
+ynh_script_progression --message="Installing dependencies..." --weight=5
 
 ynh_install_app_dependencies $pkg_dependencies
 
