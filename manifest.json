@@ -90,13 +90,13 @@
             },
             {
                 "name": "rcon",
-                "type": "boolean",
+                "type": "string",
                 "ask": {
                     "en": "Do you want to activate RCON?",
                     "fr": "Voulez vous activer RCON ?"
                 },
                 "example": "true, false",
-                "default": true
+                "default": "true"
             },
             {
                 "name": "password",
