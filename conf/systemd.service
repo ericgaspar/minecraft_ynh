@@ -1,11 +1,11 @@
 [Unit]
-Description=minecraft
+Description=Minecraft
 After=network.target
 
 [Service]
 WorkingDirectory=__PATH__
-User=admin
-Group=users
+User=__APP__
+Group=__APP__
 Type=simple
 UMask=000
 ExecStart=/usr/bin/java -Xmx__RAM__M -Xms__RAM__M -jar server.jar nogui

@@ -1,25 +1,35 @@
-# Minecraft app for YunoHost
-Minecraft Server
+# Minecraft for YunoHost
 
-- [Yunohost project](https://yunohost.org)
-- [Minecraft website](https://www.minecraft.net/)
-
-![](https://www.cziplee.com/journal/wp-content/uploads/2015/06/Minecraft-Banner.png)
-
-
+[![Integration level](https://dash.yunohost.org/integration/minecraft.svg)](https://dash.yunohost.org/appci/app/minecraft) ![](https://ci-apps.yunohost.org/ci/badges/minecraft.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/minecraft.maintain.svg)  
 [![Install Minecraft with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=minecraft)
 
-### Installing guide :
+*[Lire ce readme en français.](./README_fr.md)*
+
+> *This package allows you to install Minecraft quickly and simply on a YunoHost server.  
+If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
+
+## Overview
+Minecraft is a sandbox construction game, whose gameplay involves players interacting with the game world by placing and breaking various types of blocks in a three-dimensional environment. In this environment, players can build creative structures, creations, and artwork on multiplayer servers and singleplayer worlds across multiple game modes. 
+
+**Shipped version:** 1.16.4 (Vanilla version)
+
+## Screenshots
+
+![](home-hero-1200x600.jpg)
+
+## Configuration
+
+### Installing guide:
 
 The app can be installed through the YunoHost **admin web-interface** or by **running the following command**:
 
-         $ sudo yunohost app install https://github.com/YunoHost-Apps/minecraft_ynh
+`sudo yunohost app install https://github.com/YunoHost-Apps/minecraft_ynh`
          
 For server administration, use the Minecraft console or RCON (which is open on port 25575 with your password).
 
-### Rcon Clients :
-- https://github.com/Tee7even/RCONClient (in java)
-- https://github.com/Tiiffi/mcrcon/releases (in c)
+### Rcon Clients:
+- https://github.com/Tee7even/RCONClient (in Java)
+- https://github.com/Tiiffi/mcrcon/releases (in C)
 
 ### Start / Stop / Restart / Check Status Minecraft :
 
@@ -30,7 +40,7 @@ For server administration, use the Minecraft console or RCON (which is open on p
 
 ### Location :
 
-The folder of your servers is : ```/home/yunohost.app/```
+The folder of your servers is : `/home/yunohost.app/`
 
 ### Supported Servers :
  
@@ -39,8 +49,56 @@ The folder of your servers is : ```/home/yunohost.app/```
 3. CraftBukkit (by Spigot)
 4. BungeeCord
 5. Paper
+6. Waterfall (by Paper)
  
 ### Upgrade this package:
 
-        $ sudo yunohost app upgrade minecraft -u https://github.com/YunoHost-Apps/minecraft_ynh
+```
+sudo yunohost app upgrade minecraft -u https://github.com/YunoHost-Apps/minecraft_ynh
+```
 
+## Documentation
+
+ * Official documentation: Link to the official documentation of this app
+ * YunoHost documentation: If specific documentation is needed, feel free to contribute.
+
+## YunoHost specific features
+
+#### Multi-user support
+
+Are LDAP and HTTP auth supported?
+Can the app be used by multiple users?
+
+#### Supported architectures
+
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/minecraft%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/minecraft/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/minecraft%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/minecraft/)
+
+## Limitations
+
+* Any known limitations.
+
+## Additional information
+
+* Other info you would like to add about this app.
+
+
+## Links
+
+ * Report a bug: https://github.com/YunoHost-Apps/minecraft_ynh/issues
+ * App website: https://www.minecraft.net/
+ * Upstream app repository: Link to the official repository of the upstream app.
+ * YunoHost website: https://yunohost.org/
+
+---
+
+## Developer info
+
+Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/minecraft_ynh/tree/testing).
+
+To try the testing branch, please proceed like that.
+```
+sudo yunohost app install https://github.com/YunoHost-Apps/minecraft_ynh/tree/testing --debug
+or
+sudo yunohost app upgrade minecraft -u https://github.com/YunoHost-Apps/minecraft_ynh/tree/testing --debug
+```
