@@ -14,7 +14,6 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
 	true
 }
 # Exit if an error occurs during the execution of the script
@@ -41,12 +40,10 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
+ynh_script_progression --message="Validating installation parameters..." --time --weight=1
 
 final_path=/home/yunohost.app/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
-
-# Check web path availability
-ynh_webpath_available $domain $path_url
 
 # Register (book) web path
 ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
@@ -54,14 +51,16 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
+ynh_script_progression --message="Storing installation settings..." --time --weight=1
 
-ynh_app_setting_set $app domain $domain
-ynh_app_setting_set $app path $path_url
-ynh_app_setting_set $app is_public $is_public
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
+ynh_script_progression --message="Configuring firewall..." --time --weight=1
 
 # Find a free port
 port_test=$(ynh_find_port $port)
@@ -71,8 +70,8 @@ port_test1=$(ynh_find_port 25575)
 yunohost firewall allow --no-upnp TCP $port_test 2>&1
 yunohost firewall allow --no-upnp TCP $port_test1 2>&1
 
-ynh_app_setting_set $app port_test $port_test
-ynh_app_setting_set $app port_test1 $port_test1
+ynh_app_setting_set --app=$app --key=port --value=$port_test
+ynh_app_setting_set --app=$app --key=port --value=$port_test1
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -84,17 +83,31 @@ ynh_install_app_dependencies $pkg_dependencies
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Setting up source files..." --time --weight=1
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path" "$server"
+ynh_setup_source --dest_dir="$final_path" "$server"
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --time --weight=1
+
+# Create a dedicated nginx config
+ynh_add_nginx_config
+
+#=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Configuring system user..." --time --weight=1
+
+# Create a system user
+ynh_system_user_create --username=$app
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-
-ynh_replace_string "__RAM__" "$ram" "../conf/systemd.service"
-ynh_replace_string "__PATH__" "$final_path" "../conf/systemd.service"
 
 ynh_replace_string "__PORT__" "$port" "../conf/server.properties"
 ynh_replace_string "__RCON__" "$rcon" "../conf/server.properties"
@@ -108,34 +121,22 @@ ynh_replace_string "__EULA__" "$eula" "../conf/eula.txt"
 cp -a ../conf/eula.txt $final_path/eula.txt
 
 #=================================================
+# SETUP SYSTEMD
+#=================================================
+ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
+
+ynh_replace_string "__RAM__" "$ram" "../conf/systemd.service"
+ynh_replace_string "__PATH__" "$final_path" "../conf/systemd.service"
+
+# Create a dedicated systemd config
+ynh_add_systemd_config
+
+#=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
 
 yunohost service add $app --description="Three-dimensional sandbox construction game" --log="/var/log/$app/$app.log"
-
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..."
-
-ynh_add_systemd_config
-
-#systemctl enable $app.service --quiet
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-
-# Create a dedicated nginx config
-ynh_add_nginx_config
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-
-# Create a system user
-ynh_system_user_create $app
 
 #=================================================
 # GENERIC FINALIZATION
